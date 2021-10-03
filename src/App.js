@@ -95,7 +95,7 @@ function App() {
 };
   return (
     <div className="App">
-      <a href="https://cors-anywhere.herokuapp.com/corsdemo">Алдаа гарвал ийшээ орон хандалтийг нээнэ үү</a>
+      <a href="https://cors-anywhere.herokuapp.com/corsdemo">Алдаа гарвал ийшээ орон товч дээр дараад буцаж ирэн reload хийн  хандалтыг нээнэ үү.</a>
       <div className="first">
       <button id="submit" onClick={onSearch}onKeyPress={handleKeypress} >
           Орчуулах
