@@ -5,6 +5,7 @@ function App() {
   const [text, setText] = useState("");
   const [answer, setAnswer] = useState("Орчуулга");
   const [data, setData] = useState("");
+  const [words, setWords] = useState([]);
   //0 bol mongol 1 bol angli
   const [from, setFrom] = useState(0);//orchuulah hel
   const [to, setTo] = useState(1);//orchuulganii hariu
@@ -35,16 +36,18 @@ function App() {
           setData(result);
         });
     })();
+
   }
   const onSearch = () =>{
     if (text) {
       console.log(text);
       url = "http://www.bolor-toli.com/dictionary/word?search="+text.toLowerCase()+"&selected_lang=4-1&see_usages=true&see_variants=true";
-      setAnswer("Зөв үг оруулна уу");
       if(from === to)
         setAnswer(text);
-      else
+      else{
         take(url);
+      }
+        
     }
     else{
       console.log("empty");
@@ -52,13 +55,36 @@ function App() {
     }
   }
   useEffect(() => {
-      console.log("data ni",data);
+      //console.log("data ni",data);
+      //heregtei ugugldluudiig salgaj awah
+      //var values = str.match(/(?<=\[).+?(?=\])/g);
+      //irj bui value ni `('айх')"` bolno
+      if (data){
+        var values = data.match(/(?<=searchThisWord\s*).*?(?=\s*class)/gs);
+        // irsen ilertsuudiin zowhon ehnii 40-g awah
+        values = values.slice(0, 40);
+        //irsen value-g tsewerlen zowhon ugsiig awah
+        values !== null && values.forEach(function(part, index) {
+        this[index] = this[index].replaceAll("(","").replaceAll(")","").replaceAll("'","").replaceAll('"','');
+        }, values);
+        setWords(values);
+        console.log("values ",values);
+      }
   },[data]);
+
+  useEffect(() => {
+    if (words === null){
+      setAnswer("Илэрц олдсонгүй");
+    }
+    else{
+      setAnswer(words.join(', '));
+    }
+  },[words]);
   return (
     <div className="App">
       <div className="first">
       <button id="submit" onClick={onSearch}>
-          orchuulah
+          Орчуулах
         </button>
       </div>
         
