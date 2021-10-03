@@ -47,7 +47,6 @@ function App() {
       else{
         take(url);
       }
-        
     }
     else{
       console.log("empty");
@@ -56,9 +55,7 @@ function App() {
   }
   
   useEffect(() => {
-      //console.log("data ni",data);
       //heregtei ugugldluudiig salgaj awah
-      //var values = str.match(/(?<=\[).+?(?=\])/g);
       //irj bui value ni `('айх')"` bolno
       if (data){
         var values = data.match(/(?<=searchThisWord\s*).*?(?=\s*class)/gs);
@@ -92,6 +89,7 @@ function App() {
 };
   return (
     <div className="App">
+      <a href="https://cors-anywhere.herokuapp.com/corsdemo">403 хариу өгвөл ийшээ орон хандалтийг нээнэ үү</a>
       <div className="first">
       <button id="submit" onClick={onSearch}onKeyPress={handleKeypress} >
           Орчуулах
