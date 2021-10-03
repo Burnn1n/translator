@@ -8,18 +8,19 @@
 	.first{
 		text-align: center;
 		button{
-			border: none;
-					border-bottom: #3c4043;
-					height: 40px;
-					background-color: white;
-					text-transform: uppercase;
-					font-size: 14px;
-					font-weight: 500;
-					color: #646464;
-					&:hover{
-						background-color: #dbdbdb;
-						color: black;
-					}
+			border-radius: 40px;
+			background: #3e64ff;
+			border-color: #3e64ff;
+			color: #fff;
+			padding: 11px 16px;
+			border-width: 1px;
+			text-transform: uppercase;
+			font-size: 14px;
+			font-weight: 500;
+			&:hover{
+				background-color: #dbdbdb;
+				color: black;
+			}
 		}
 	}
 	.translator{
