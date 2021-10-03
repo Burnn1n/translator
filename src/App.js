@@ -117,7 +117,8 @@ function App() {
           </button>
         </div>
         <div className="fieldInput">
-          <textarea name="" id="" cols="30" rows="10" onChange={e => setText(e.target.value)}placeholder="Орчуулах үгээ"></textarea>
+          <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+          onChange={e => setText(e.target.value)}placeholder="Орчуулах үгээ"></textarea>
         </div>
       </div>
       <div className="field">
@@ -134,7 +135,7 @@ function App() {
           </button>
         </div>
         <div className={!text?'fieldInput':'fieldInput translation'}>
-          <textarea cols="30" rows="10" className="translation" value={answer} disabled></textarea>
+          <textarea className="answer" value={answer} disabled></textarea>
         </div>
       </div>
       </div>
