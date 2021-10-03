@@ -54,6 +54,7 @@ function App() {
       setAnswer("Орчуулга");
     }
   }
+  
   useEffect(() => {
       //console.log("data ni",data);
       //heregtei ugugldluudiig salgaj awah
@@ -62,11 +63,13 @@ function App() {
       if (data){
         var values = data.match(/(?<=searchThisWord\s*).*?(?=\s*class)/gs);
         // irsen ilertsuudiin zowhon ehnii 40-g awah
-        values = values.slice(0, 40);
-        //irsen value-g tsewerlen zowhon ugsiig awah
-        values !== null && values.forEach(function(part, index) {
-        this[index] = this[index].replaceAll("(","").replaceAll(")","").replaceAll("'","").replaceAll('"','');
-        }, values);
+        if(values){
+          values = values.slice(0, 40);
+          //irsen value-g tsewerlen zowhon ugsiig awah
+          values !== null && values.forEach(function(part, index) {
+          this[index] = this[index].replaceAll("(","").replaceAll(")","").replaceAll("'","").replaceAll('"','');
+          }, values);
+        }
         setWords(values);
         console.log("values ",values);
       }
@@ -80,10 +83,17 @@ function App() {
       setAnswer(words.join(', '));
     }
   },[words]);
+
+  const handleKeypress = e => {
+    //13 = enter
+  if (e.keyCode === 13) {
+    onSearch();
+  }
+};
   return (
     <div className="App">
       <div className="first">
-      <button id="submit" onClick={onSearch}>
+      <button id="submit" onClick={onSearch}onKeyPress={handleKeypress} >
           Орчуулах
         </button>
       </div>
