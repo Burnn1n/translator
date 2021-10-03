@@ -32,7 +32,7 @@ function App() {
       doCORSRequest({
           method:'GET',
           url: webUrl,
-        }, function printResult(result) {
+        }, function setResult(result) {
           setData(result);
         });
     })();
@@ -56,6 +56,7 @@ function App() {
   }
   
   useEffect(() => {
+      console.log("data ",data);
       //heregtei ugugldluudiig salgaj awah
       //irj bui value ni `('айх')"` bolno
       if (data){
@@ -70,12 +71,16 @@ function App() {
         }
         setWords(values);
         console.log("values ",values);
+        if(data.length < 200)
+          setAnswer("Алдаа гарлаа");
       }
   },[data]);
 
   useEffect(() => {
     if (words === null){
       setAnswer("Илэрц олдсонгүй");
+      if(data.length < 200)
+        setAnswer("Алдаа гарлаа");
     }
     else{
       setAnswer(words.join(', '));
@@ -90,7 +95,7 @@ function App() {
 };
   return (
     <div className="App">
-      <a href="https://cors-anywhere.herokuapp.com/corsdemo">403 хариу өгвөл ийшээ орон хандалтийг нээнэ үү</a>
+      <a href="https://cors-anywhere.herokuapp.com/corsdemo">Алдаа гарвал ийшээ орон хандалтийг нээнэ үү</a>
       <div className="first">
       <button id="submit" onClick={onSearch}onKeyPress={handleKeypress} >
           Орчуулах
