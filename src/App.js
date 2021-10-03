@@ -46,6 +46,7 @@ function App() {
         setAnswer(text);
       else{
         take(url);
+        setAnswer("Түр хүлээнэ үү");
       }
     }
     else{
