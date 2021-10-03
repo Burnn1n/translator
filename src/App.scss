@@ -1,0 +1,92 @@
+.App {
+	max-width: 1360px;
+	margin:0 auto;
+	margin-top: 100px;
+	button{
+		cursor: pointer;
+	}
+	.first{
+		text-align: center;
+		button{
+			border: none;
+					border-bottom: #3c4043;
+					height: 40px;
+					background-color: white;
+					text-transform: uppercase;
+					font-size: 14px;
+					font-weight: 500;
+					color: #646464;
+					&:hover{
+						background-color: #dbdbdb;
+						color: black;
+					}
+		}
+	}
+	.translator{
+		display: flex;
+		border-top: 1px solid rgba(0,0,0,0.12);
+    box-shadow: 0 2px 2px rgb(0 0 0 / 22%);
+		border-radius: 10px;
+		.field{
+			width: 50%;
+			border-left: 1px solid rgba(0,0,0,0.12);
+			.fieldHeader{
+				justify-content: center;
+				height: 48px;
+				border-bottom: 1px solid #c0c0c0;
+				.language{
+					border: none;
+					border-bottom: #3c4043;
+					width: 25%;
+					height: 100%;
+					background-color: white;
+					text-transform: uppercase;
+					font-family: "Roboto",arial,sans-serif;
+					font-size: 14px;
+					font-weight: 500;
+					color: #646464;
+					&:hover{
+						background-color: #dbdbdb;
+						color: black;
+					}
+				}
+				.selected{
+					color: #1a73e8;
+					border-bottom: 1px solid #1a73e8;;
+					&:hover{
+						color: #1a73e8;
+						background-color: #edecff;
+					}
+				}
+			}
+			.fieldInput{
+				padding: 20px 58px 20px 24px;
+				textarea{
+					background: transparent;
+					border: none;
+					border: none;
+					overflow: auto;
+					outline: none;
+					-webkit-box-shadow: none;
+					-moz-box-shadow: none;
+					box-shadow: none;
+					color: #3c4043;
+					flex: 1;
+					font-family: inherit;
+					overflow: auto hidden;
+					padding: 0;
+					resize: none;
+					white-space: pre-wrap;
+					min-height: 49px;
+					width: 100%;
+					z-index: 1;
+					font-size: 24px;
+					line-height: 32px;
+				}
+			}
+			.translation{
+				background-color: rgba(146, 146, 146, 0.12);
+			}
+		}
+	}
+}

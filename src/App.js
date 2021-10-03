@@ -1,23 +1,103 @@
-import logo from './logo.svg';
-import './App.css';
-
+import './App.scss';
+import React, { useEffect, useState } from "react";
 function App() {
+  var url = "https://example.com";
+  const [text, setText] = useState("");
+  const [answer, setAnswer] = useState("Орчуулга");
+  const [data, setData] = useState("");
+  //0 bol mongol 1 bol angli
+  const [from, setFrom] = useState(0);//orchuulah hel
+  const [to, setTo] = useState(1);//orchuulganii hariu
+
+  var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+  //no-cors policy set up hiih
+  function doCORSRequest(options, printResult) {
+    var x = new XMLHttpRequest();
+    x.open(options.method, cors_api_url + options.url);
+    x.onload = x.onerror = function() {
+      printResult(
+        options.method + ' ' + options.url + '\n' +
+        x.status + ' ' + x.statusText + '\n\n' +
+        (x.responseText || '')
+      );
+    };
+    if (/^POST/i.test(options.method)) {
+      x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    }
+    x.send(options.data);
+  }
+  const take = (webUrl) => {
+    (function() {
+      doCORSRequest({
+          method:'GET',
+          url: webUrl,
+        }, function printResult(result) {
+          setData(result);
+        });
+    })();
+  }
+  const onSearch = () =>{
+    if (text) {
+      console.log(text);
+      url = "http://www.bolor-toli.com/dictionary/word?search="+text.toLowerCase()+"&selected_lang=4-1&see_usages=true&see_variants=true";
+      setAnswer("Зөв үг оруулна уу");
+      if(from === to)
+        setAnswer(text);
+      else
+        take(url);
+    }
+    else{
+      console.log("empty");
+      setAnswer("Орчуулга");
+    }
+  }
+  useEffect(() => {
+      console.log("data ni",data);
+  },[data]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="first">
+      <button id="submit" onClick={onSearch}>
+          orchuulah
+        </button>
+      </div>
+        
+      <div className="translator">
+      <div className="field">
+        <div className="fieldHeader">
+          <button className={from===0?"language selected":"language"} onClick={() => setFrom(0)}>
+          <span>
+            Монгол
+          </span>
+          </button>
+          <button className={from===1?"language selected":"language"} onClick={() => setFrom(1)}>
+          <span>
+            English
+          </span>
+          </button>
+        </div>
+        <div className="fieldInput">
+          <textarea name="" id="" cols="30" rows="10" onChange={e => setText(e.target.value)}></textarea>
+        </div>
+      </div>
+      <div className="field">
+      <div className="fieldHeader">
+          <button className={to===0?"language selected":"language"} onClick={() => setTo(0)} >
+          <span>
+            Монгол
+          </span>
+          </button>
+          <button className={to===1?"language selected":"language"} onClick={() => setTo(1)}>
+          <span>
+            English
+          </span>
+          </button>
+        </div>
+        <div className={!text?'fieldInput':'fieldInput translation'}>
+          <textarea cols="30" rows="10" className="translation" value={answer} disabled ></textarea>
+        </div>
+      </div>
+      </div>
     </div>
   );
 }
