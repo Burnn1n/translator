@@ -60,13 +60,16 @@ function App() {
       //heregtei ugugldluudiig salgaj awah
       //irj bui value ni `('айх')"` bolno
       if (data){
-        var values = data.match(/(?<=searchThisWord\s*).*?(?=\s*class)/gs);
+        var values = data.match(/(?:searchThisWord\s*).*?(?=\s*class)/gs);
         // irsen ilertsuudiin zowhon ehnii 40-g awah
         if(values){
           values = values.slice(0, 40);
           //irsen value-g tsewerlen zowhon ugsiig awah
           values !== null && values.forEach(function(part, index) {
-          this[index] = this[index].replaceAll("(","").replaceAll(")","").replaceAll("'","").replaceAll('"','');
+
+          
+          this[index] = this[index].replace(/'/g, '').replace(/"/g,'').replace(/searchThisWord/g,'').replace("(","")
+          .replace(")","");
           }, values);
         }
         setWords(values);
